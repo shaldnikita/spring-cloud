@@ -1,0 +1,33 @@
+server:
+  port: ${PORT:8098}
+
+# configure eureka client
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 3
+  client:
+    serviceUrl:
+      defaultZone: http://user:password@eureka-server:8761/eureka/
+
+# custom attribute for the actuator info endpoint
+info:
+  app:
+    name: bookstore-service
+
+# give the application a name
+spring:
+  application:
+    name: bookstore-service
+
+# disable actuagor security for endpoints
+management:
+  security:
+    enabled: false
+
+# custom logging settings
+logging:
+  level:
+      - ".=info"
+      - "com.memorynotfound=debug"
+      - "org.springframework=info"
