@@ -8,26 +8,14 @@ eureka:
     leaseExpirationDurationInSeconds: 3
   client:
     serviceUrl:
-      defaultZone: http://user:password@eureka-server:8761/eureka/
-
-# custom attribute for the actuator info endpoint
-info:
-  app:
-    name: bookstore-service
+      defaultZone: http://user:password@localhost:8761/eureka/
 
 # give the application a name
 spring:
   application:
-    name: bookstore-service
+    name: bookstore
 
 # disable actuagor security for endpoints
 management:
   security:
     enabled: false
-
-# custom logging settings
-logging:
-  level:
-      - ".=info"
-      - "com.memorynotfound=debug"
-      - "org.springframework=info"
