@@ -11,10 +11,8 @@ spring:
 eureka:
   instance:
     prefer-ip-address: true
-     hostname: registry
   client:
     registerWithEureka: false
     fetchRegistry: false
     server:
       waitTimeInMsWhenSyncEmpty: 0
-

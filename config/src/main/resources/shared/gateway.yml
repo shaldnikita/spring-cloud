@@ -1,23 +1,24 @@
-server:
-  port: 5000
-
-spring:
-  application:
-    name: gateway
-
 ribbon:
   ReadTimeout: 20000
   ConnectTimeout: 20000
 
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+
 zuul:
   ignoredServices: '*'
   host:
-     connect-timeout-millis: 20000
-     socket-timeout-millis: 20000
+    connect-timeout-millis: 20000
+    socket-timeout-millis: 20000
 
   routes:
-    bookstore-service:
-      path: /bookstore/**
+    bookstore:
+      path: /**
       serviceId: bookstore
       stripPrefix: false
       sensitiveHeaders:
+
+server:
+  port: 5000

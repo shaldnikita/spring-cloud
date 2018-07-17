@@ -1,19 +1,7 @@
 server:
-  port: ${PORT:8098}
-
-# configure eureka client
-eureka:
-  instance:
-    leaseRenewalIntervalInSeconds: 1
-    leaseExpirationDurationInSeconds: 3
-  client:
-    serviceUrl:
-      defaultZone: http://user:password@localhost:8761/eureka/
-
-# give the application a name
-spring:
-  application:
-    name: bookstore
+  servlet:
+    context-path: /bookstore
+  port: ${PORT:7000}
 
 # disable actuagor security for endpoints
 management:
