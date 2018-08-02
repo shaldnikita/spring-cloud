@@ -4,4 +4,4 @@ MAINTAINER Nikita Shaldenkov <shaldnikita2@yandex.ru>
 ADD ./target/bookstore.jar /app/
 CMD ["java", "-Xmx200m", "-jar", "/app/bookstore.jar"]
 
-EXPOSE 4000
+EXPOSE 8080

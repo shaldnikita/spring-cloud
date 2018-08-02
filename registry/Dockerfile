@@ -4,4 +4,4 @@ MAINTAINER Nikita Shaldenkov <shaldnikita2@yandex.ru>
 ADD ./target/registry.jar /app/
 CMD ["java", "-Xmx200m", "-jar", "/app/registry.jar"]
 
-EXPOSE 4000
+EXPOSE 8761
