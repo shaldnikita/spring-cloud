@@ -1,0 +1,45 @@
+sudo: required
+
+services:
+  - docker
+
+language: java
+jdk: oraclejdk8
+
+env:
+  global:
+    - secure:  # DOCKER_EMAIL
+    - secure:  # DOCKER_USER
+    - secure:  # DOCKER_PASS
+    - COMMIT=${TRAVIS_COMMIT::7}
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+  - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+
+  #TAG
+  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
+
+  # CONFIG SERVICE
+  - export CONFIG=shaldnikita/homeproject-config
+  - docker build -t $CONFIG:$COMMIT ./config
+  - docker tag $CONFIG:$COMMIT $CONFIG:$TAG
+  - docker push $CONFIG
+
+  # REGISTRY
+  - export REGISTRY=shaldnikita/homeproject-registry
+  - docker build -t $REGISTRY:$COMMIT ./registry
+  - docker tag $REGISTRY:$COMMIT $REGISTRY:$TAG
+  - docker push $REGISTRY
+
+  # GATEWAY
+  - export GATEWAY=shaldnikita/homeproject-gateway
+  - docker build -t $GATEWAY:$COMMIT ./gateway
+  - docker tag $GATEWAY:$COMMIT $GATEWAY:$TAG
+  - docker push $GATEWAY
+
+  # MONITORING
+  - export MONITORING=shaldnikita/homeproject-monitoring
+  - docker build -t $MONITORING:$COMMIT ./monitoring
+  - docker tag $MONITORING:$COMMIT $MONITORING:$TAG
+  - docker push $MONITORING
