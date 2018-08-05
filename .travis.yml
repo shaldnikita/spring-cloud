@@ -8,9 +8,9 @@ jdk: oraclejdk8
 
 env:
   global:
-    - secure:  # DOCKER_EMAIL
-    - secure:  # DOCKER_USER
-    - secure:  # DOCKER_PASS
+    - secure:  asd # DOCKER_EMAIL
+    - secure:  dsa # DOCKER_USER
+    - secure:  asd # DOCKER_PASS
     - COMMIT=${TRAVIS_COMMIT::7}
 
 after_success:
