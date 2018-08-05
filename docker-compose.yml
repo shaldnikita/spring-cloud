@@ -1,4 +1,4 @@
-version: '2.1'
+version: '3.1'
 
 services:
   rabbitmq:
@@ -13,7 +13,7 @@ services:
 
   config:
     environment:
-      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+      CONFIG_SERVICE_PASSWORD: changeme
     image: shaldnikita/homeproject-config
     restart: always
     logging:
@@ -23,12 +23,11 @@ services:
 
   registry:
     environment:
-      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+      CONFIG_SERVICE_PASSWORD: changeme
     image: shaldnikita/homeproject-registry
     restart: always
     depends_on:
-      config:
-        condition: service_healthy
+      - config
     ports:
       - 8761:8761
     logging:
@@ -38,12 +37,11 @@ services:
 
   gateway:
     environment:
-      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+      CONFIG_SERVICE_PASSWORD: changeme
     image: shaldnikita/homeproject-gateway
     restart: always
     depends_on:
-      config:
-        condition: service_healthy
+      - config
     ports:
       - 80:4000
     logging:
@@ -53,12 +51,11 @@ services:
 
   monitoring:
     environment:
-      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+      CONFIG_SERVICE_PASSWORD: changeme
     image: shaldnikita/homeproject-monitoring
     restart: always
     depends_on:
-          config:
-            condition: service_healthy
+      - config
     ports:
       - 9000:8080
       - 8989:8989
@@ -68,21 +65,23 @@ services:
         max-file: "10"
 
   bookstore:
-      image: shaldnikita/homeproject-bookstore
-      restart: always
-      depends_on:
-            config:
-              condition: service_healthy
-      ports:
-        - 8080:8080
-      logging:
-        options:
-          max-size: "10m"
-          max-file: "10"
+    environment:
+      CONFIG_SERVICE_PASSWORD: changeme
+      MSQL_PASSWORD: changeme
+    image: shaldnikita/homeproject-bookstore
+    restart: always
+    depends_on:
+      - config
+    ports:
+      - 8080:8080
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
 
   bookstore-mysql:
     environment:
-      MYSQL_ROOT_PASSWORD: $MYSQL_PASSWORD
+      MYSQL_ROOT_PASSWORD: changeme
     image: mysql
     command: --default-authentication-plugin=mysql_native_password
     restart: always

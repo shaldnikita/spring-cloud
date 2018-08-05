@@ -1,0 +1,23 @@
+version: '3.1'
+
+services:
+  rabbitmq:
+    ports:
+      - 5672:5672
+
+  config:
+    build: config
+    ports:
+      - 8888:8888
+
+  registry:
+    build: registry
+
+  gateway:
+    build: gateway
+
+  bookstore:
+    build: bookstore
+
+  monitoring:
+    build: monitoring
