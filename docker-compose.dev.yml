@@ -10,6 +10,9 @@ services:
     ports:
       - 8888:8888
 
+  auth-service:
+    build: auth-service
+
   registry:
     build: registry
 

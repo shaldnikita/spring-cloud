@@ -25,8 +25,6 @@ public class AuthServerConfiguration extends AuthorizationServerConfigurerAdapte
 
     private TokenStore tokenStore = new InMemoryTokenStore();
 
-    private final String NOOP_PASSWORD_ENCODE = "{noop}";
-
     @Qualifier("authenticationManagerBean")
     private final AuthenticationManager authenticationManager;
 

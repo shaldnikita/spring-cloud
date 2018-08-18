@@ -67,10 +67,37 @@ services:
         max-size: "10m"
         max-file: "10"
 
+  auth-service:
+    environment:
+      CONFIG_SERVICE_PASSWORD: changeme
+      MYSQL_PASSWORD: changeme
+    image: shaldnikita/homeproject-auth
+    restart: always
+    depends_on:
+      config:
+        condition: service_healthy
+    ports:
+      - 5000:5000
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  auth-mysql:
+    environment:
+      MYSQL_ROOT_PASSWORD: changeme
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
   bookstore:
     environment:
       CONFIG_SERVICE_PASSWORD: changeme
-      MSQL_PASSWORD: changeme
+      MYSQL_PASSWORD: changeme
     image: shaldnikita/homeproject-bookstore
     restart: always
     depends_on:
