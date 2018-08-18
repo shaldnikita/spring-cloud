@@ -14,8 +14,14 @@ zuul:
     socket-timeout-millis: 20000
 
   routes:
+    auth-service:
+      path: /auth/**
+      url: auth-service
+      stripPrefix: false
+      sensitiveHeaders:
+
     bookstore:
-      path: /**
+      path: /bookstore/**
       serviceId: bookstore
       stripPrefix: false
       sensitiveHeaders:
