@@ -3,10 +3,16 @@ server:
     context-path: /auth
   port: ${PORT:5000}
 
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://registry:${PORT:8761}/eureka
+
 spring.jpa:
   hibernate:
     ddl-auto: create
     use-new-id-generator-mappings: true
   datasource:
-      url: jdbc:mysql://auth-mysql:3306/home_project
-      password: ${MYSQL_PASSWORD}
+    url: jdbc:mysql://auth-mysql:3306/home_project
+    password: ${MYSQL_PASSWORD}
+

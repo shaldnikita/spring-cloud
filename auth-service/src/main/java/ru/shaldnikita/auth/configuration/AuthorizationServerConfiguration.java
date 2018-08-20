@@ -21,7 +21,7 @@ import ru.shaldnikita.auth.service.security.SecurityUserDetailsService;
 @Configuration
 @EnableAuthorizationServer
 @RequiredArgsConstructor
-public class AuthServerConfiguration extends AuthorizationServerConfigurerAdapter {
+public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
 
     private TokenStore tokenStore = new InMemoryTokenStore();
 
@@ -57,6 +57,8 @@ public class AuthServerConfiguration extends AuthorizationServerConfigurerAdapte
                 .authenticationManager(authenticationManager)
                 .userDetailsService(userDetailsService);
     }
+
+
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer oauthServer) {

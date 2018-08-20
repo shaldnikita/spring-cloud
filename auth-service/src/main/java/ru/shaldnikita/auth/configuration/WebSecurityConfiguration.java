@@ -22,14 +22,23 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .authorizeRequests().anyRequest().authenticated()
+                .requestMatchers()
+                .antMatchers("/login", "/oauth/authorize")
+                .and()
+                .authorizeRequests()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .permitAll()
                 .and()
                 .csrf().disable();
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService)
+        auth
+                .parentAuthenticationManager(authenticationManagerBean())
+                .userDetailsService(userDetailsService)
                 .passwordEncoder(passwordEncoder());
     }
 

@@ -71,7 +71,7 @@ services:
     environment:
       CONFIG_SERVICE_PASSWORD: changeme
       MYSQL_PASSWORD: changeme
-    image: shaldnikita/homeproject-auth
+    image: shaldnikita/homeproject-auth-service
     restart: always
     depends_on:
       config:
