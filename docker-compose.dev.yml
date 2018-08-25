@@ -16,11 +16,5 @@ services:
   registry:
     build: registry
 
-  gateway:
-    build: gateway
-
-  bookstore:
-    build: bookstore
-
   monitoring:
     build: monitoring

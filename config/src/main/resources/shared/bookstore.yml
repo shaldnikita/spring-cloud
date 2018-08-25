@@ -3,8 +3,13 @@ server:
     context-path: /bookstore
   port: ${PORT:7000}
 
+
+---
+spring.profiles: prod
+
 eureka:
   client:
+    enabled: true
     serviceUrl:
       defaultZone: http://registry:${PORT:8761}/eureka
 
@@ -16,3 +21,37 @@ spring.jpa:
     url: jdbc:mysql://bookstore-mysql:3306/home_project
     password: ${MYSQL_PASSWORD}
 
+security:
+  oauth2:
+    client:
+      clientId: bookstore
+      clientSecret: changeme
+      accessTokenUri: http://auth-service:5000/auth/oauth/token
+      userAuthorizationUri: http://auth-service:5000/auth/oauth/authorize
+    resource:
+      userInfoUri: http://auth-service:5000/auth/current
+
+---
+spring.profiles: default
+
+eureka.client.enabled: false
+
+spring.jpa:
+  hibernate:
+    ddl-auto: create
+    use-new-id-generator-mappings: true
+  datasource:
+    url: jdbc:mysql://localhost:3306/home_project
+    password: ${MYSQL_PASSWORD}
+
+security:
+  basic:
+    enabled: false
+  oauth2:
+    client:
+      clientId: bookstore
+      clientSecret: changeme
+      accessTokenUri: http://localhost:5000/auth/oauth/token
+      userAuthorizationUri: http://localhost:5000/auth/oauth/authorize
+    resource:
+      userInfoUri: http://localhost:5000/auth/current

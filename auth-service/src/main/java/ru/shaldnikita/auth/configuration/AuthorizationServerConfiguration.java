@@ -3,7 +3,6 @@ package ru.shaldnikita.auth.configuration;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -32,8 +31,6 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 
     private final PasswordEncoder encoder;
 
-    private final Environment env;
-
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 
@@ -44,7 +41,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
                 .scopes("ui")
                 .and()
                 .withClient("bookstore")
-                .secret(env.getProperty("BOOKSTORE_PASSWORD"))
+                .secret("changeme")
                 .authorizedGrantTypes("client_credentials", "refresh_token")
                 .scopes("server");
         // @formatter:on
@@ -57,7 +54,6 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
                 .authenticationManager(authenticationManager)
                 .userDetailsService(userDetailsService);
     }
-
 
 
     @Override

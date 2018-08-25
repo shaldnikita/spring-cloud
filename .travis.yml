@@ -25,7 +25,7 @@ after_success:
 
   # BOOKSTORE SERVICE
   - export BOOKSTORE=shaldnikita/homeproject-bookstore
-  - docker build -t $BOOKSTORE:$COMMIT ./bookstore
+  - docker build -t $BOOKSTORE:3$COMMIT ./bookstore
   - docker tag $BOOKSTORE:$COMMIT $BOOKSTORE:$TAG
   - docker push $BOOKSTORE
 
