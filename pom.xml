@@ -12,7 +12,6 @@
     <modules>
         <module>registry</module>
         <module>bookstore</module>
-        <module>monitoring</module>
         <module>config</module>
         <module>gateway</module>
     </modules>
