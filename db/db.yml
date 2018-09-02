@@ -1,18 +1,18 @@
 version: '2.1'
 
 services:
-  mysql:
-    image: mysql
-    ports:
-      - 3306:3306
+
+  postgresql:
+    image: postgres:9.6
     environment:
-      MYSQL_ROOT_PASSWORD: changeme
-      MYSQL_USER: user
-      MYSQL_PASSWORD: changeme
-      MYSQL_DATABASE: homeproject
+      POSTGRES_DB: homeproject
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: changeme
+    ports:
+    - 5432:5432
 
   adminer:
     image: adminer
     restart: always
     ports:
-    - 80:8080
+    - 8080:8080

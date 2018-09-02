@@ -1,0 +1,6 @@
+eureka.client.enabled: false
+
+security:
+  oauth2:
+    resource:
+      user-info-uri: http://localhost/auth/users/current

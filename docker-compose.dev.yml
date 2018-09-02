@@ -15,6 +15,3 @@ services:
 
   registry:
     build: registry
-
-  monitoring:
-    build: monitoring

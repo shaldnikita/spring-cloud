@@ -3,23 +3,26 @@ server:
     context-path: /bookstore
   port: ${PORT:7000}
 
+spring:
+  jpa:
+  database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+  properties:
+    hibernate:
+      temp:
+      use_jdbc_metadata_defaults: false
 
 ---
 spring.profiles: prod
 
-eureka:
-  client:
-    enabled: true
-    serviceUrl:
-      defaultZone: http://registry:${PORT:8761}/eureka
-
-spring.jpa:
-  hibernate:
-    ddl-auto: create
-    use-new-id-generator-mappings: true
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: create
+      use-new-id-generator-mappings: true
   datasource:
-    url: jdbc:mysql://bookstore-mysql:3306/home_project
-    password: ${MYSQL_PASSWORD}
+    url: jdbc:postgresql://bookstore-postgresql:5432/homeproject
+    username: $(POSTGRES_USER:user}
+    password: ${POSTGRES_PASSWORD:changeme}
 
 security:
   oauth2:
@@ -34,19 +37,17 @@ security:
 ---
 spring.profiles: default
 
-eureka.client.enabled: false
-
-spring.jpa:
-  hibernate:
-    ddl-auto: create
-    use-new-id-generator-mappings: true
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: create
+      use-new-id-generator-mappings: true
   datasource:
-    url: jdbc:mysql://localhost:3306/home_project
-    password: ${MYSQL_PASSWORD}
+    url: jdbc:postgresql://localhost:5432/homeproject
+    username: $(POSTGRES_USER:user}
+    password: ${POSTGRES_PASSWORD:changeme}
 
 security:
-  basic:
-    enabled: false
   oauth2:
     client:
       clientId: bookstore
