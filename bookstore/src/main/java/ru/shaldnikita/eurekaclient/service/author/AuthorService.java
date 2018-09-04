@@ -43,7 +43,7 @@ public class AuthorService {
 
 
     @Transactional(readOnly = true)
-    public Page<AuthorModel> findAuthor(Pageable pageable) {
+    public Page<AuthorModel> findAuthors(Pageable pageable) {
         return this.repository.findAll(pageable)
                 .map(author -> new AuthorModel(
                         author.getAuthorId().getId(),
