@@ -24,6 +24,7 @@ public class AuthorService {
     private final AuthorRepository repository;
 
     @Nonnull
+    @Transactional
     public Author createAuthor(AuthorModel authorToBeCreated) {
         Author author = new Author(authorToBeCreated.getName(),
                 authorToBeCreated.getBirthdayDate());

@@ -8,7 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.shaldnikita.eurekaclient.domain.book.Book;
 import ru.shaldnikita.eurekaclient.domain.book.BookId;
-import ru.shaldnikita.eurekaclient.port.adapter.books.BookModel;
+import ru.shaldnikita.eurekaclient.port.adapter.books.model.BookModel;
+import ru.shaldnikita.eurekaclient.port.adapter.books.model.CreateBookModel;
+import ru.shaldnikita.eurekaclient.port.adapter.books.model.UpdateBookModel;
 import ru.shaldnikita.eurekaclient.service.book.BookService;
 
 import javax.validation.Valid;
@@ -43,14 +45,14 @@ public class BooksController {
     }
 
     @PostMapping
-    public ResponseEntity createBook(@Valid @RequestBody BookModel book) throws URISyntaxException {
+    public ResponseEntity createBook(@Valid @RequestBody CreateBookModel book) throws URISyntaxException {
         Book createdBook = this.bookService.createBook(book);
         URI createdBookUri = new URI("api/books/" + createdBook.getBookId().getId());
         return ResponseEntity.created(createdBookUri).build();
     }
 
     @PutMapping
-    public ResponseEntity updateBook(@Valid @RequestBody BookModel book) {
+    public ResponseEntity updateBook(@Valid @RequestBody UpdateBookModel book) {
         this.bookService.updateBook(book);
         return ResponseEntity.ok().build();
     }

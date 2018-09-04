@@ -9,7 +9,7 @@ import javax.annotation.Nonnull;
 /**
  * @author n.shaldenkov on 02.09.2018
  */
-@ResponseStatus(HttpStatus.BAD_REQUEST)
+@ResponseStatus(HttpStatus.NOT_FOUND)
 public class AuthorNotFoundException extends IllegalArgumentException{
 
     public AuthorNotFoundException(@Nonnull AuthorId authorId) {
