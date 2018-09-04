@@ -12,6 +12,10 @@ public class BookId {
 
     private String id;
 
+    public BookId(String id) {
+        this.id = id;
+    }
+
     BookId() {
         this.id = UUID.randomUUID().toString();
     }

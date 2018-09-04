@@ -7,12 +7,14 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.shaldnikita.eurekaclient.domain.book.Book;
+import ru.shaldnikita.eurekaclient.domain.book.BookId;
 import ru.shaldnikita.eurekaclient.port.adapter.books.BookModel;
 import ru.shaldnikita.eurekaclient.service.book.BookService;
 
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Optional;
 
 @RestController("/api/books")
 @RequiredArgsConstructor
@@ -23,6 +25,21 @@ public class BooksController {
     @GetMapping
     public Page<BookModel> getBooks(@PageableDefault PageRequest pageable) {
         return this.bookService.findBooks(pageable);
+    }
+
+    @GetMapping("/{bookId}")
+    public ResponseEntity getBook(@PathVariable String bookId) {
+        Optional<Book> book = this.bookService.findBookByBookId(new BookId(bookId));
+        return book.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/{bookId}")
+    public ResponseEntity deleteBook(@PathVariable String bookId) {
+        boolean deleted = this.bookService.deleteBook(new BookId(bookId));
+        if(deleted)
+            return ResponseEntity.ok().build();
+        else
+            return ResponseEntity.badRequest().build();
     }
 
     @PostMapping

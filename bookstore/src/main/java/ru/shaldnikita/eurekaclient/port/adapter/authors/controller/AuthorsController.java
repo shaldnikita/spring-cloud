@@ -33,10 +33,7 @@ public class AuthorsController {
     @GetMapping("/{authorId}")
     public ResponseEntity getAuthor(@PathVariable String authorId){
         Optional<Author> author = this.authorService.findAuthorByAuthorId(new AuthorId(authorId));
-        if(author.isPresent())
-            return ResponseEntity.ok(author);
-        else
-            return ResponseEntity.notFound().build();
+        return author.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
