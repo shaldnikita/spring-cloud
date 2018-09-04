@@ -13,6 +13,7 @@
         <module>registry</module>
         <module>bookstore</module>
         <module>config</module>
+        <module>auth-service</module>
         <module>gateway</module>
     </modules>
 
