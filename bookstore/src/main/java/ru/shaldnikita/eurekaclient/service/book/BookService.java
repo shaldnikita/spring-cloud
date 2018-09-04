@@ -17,6 +17,7 @@ import ru.shaldnikita.eurekaclient.port.adapter.books.model.CreateBookModel;
 import ru.shaldnikita.eurekaclient.port.adapter.books.model.UpdateBookModel;
 import ru.shaldnikita.eurekaclient.service.author.AuthorService;
 
+import javax.annotation.Nonnull;
 import java.util.Optional;
 
 /**
@@ -31,6 +32,7 @@ public class BookService {
     private final AuthorService authorService;
 
     @Transactional
+    @Nonnull
     public Book createBook(CreateBookModel book) {
         return this.authorService.findAuthorByAuthorId(new AuthorId(book.getAuthorId()))
                 .map(author -> new Book(book.getName(), book.getPrice(), author))
@@ -44,11 +46,13 @@ public class BookService {
     }
 
     @Transactional(readOnly = true)
+    @Nonnull
     public Optional<Book> findBookByBookId(BookId bookId) {
         return this.bookRepository.findByBookId(bookId);
     }
 
     @Transactional(readOnly = true)
+    @Nonnull
     public Page<BookModel> findBooks(Pageable pageable) {
         return this.bookRepository.findAll(pageable)
                 .map(book -> new BookModel(
@@ -59,6 +63,7 @@ public class BookService {
     }
 
     @Transactional
+    @Nonnull
     public Book updateBook(UpdateBookModel updateBook){
         return this.bookRepository.findByBookId(new BookId(updateBook.getBookId()))
                 .map(book -> updateBook(updateBook,book))
@@ -66,6 +71,7 @@ public class BookService {
                 .orElseThrow(() -> new BookNotFoundException(new BookId(updateBook.getBookId())));
     }
 
+    @Nonnull
     private Book updateBook(UpdateBookModel updateBook, Book book){
         AuthorId authorId = new AuthorId(updateBook.getAuthorId());
         Optional<Author> author = this.authorService.findAuthorByAuthorId(authorId);
@@ -75,7 +81,6 @@ public class BookService {
         book.setAuthor(author.get());
         book.setName(updateBook.getName());
         book.setPrice(updateBook.getPrice());
-
         return book;
     }
 }

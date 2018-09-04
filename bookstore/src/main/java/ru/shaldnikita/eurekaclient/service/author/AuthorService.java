@@ -43,6 +43,7 @@ public class AuthorService {
     }
 
 
+    @Nonnull
     @Transactional(readOnly = true)
     public Page<AuthorModel> findAuthors(Pageable pageable) {
         return this.repository.findAll(pageable)
@@ -53,6 +54,7 @@ public class AuthorService {
                 );
     }
 
+    @Nonnull
     @Transactional
     public Author updateAuthor(AuthorModel authorToBeUpdated) {
         AuthorId authorId = new AuthorId(authorToBeUpdated.getId());
