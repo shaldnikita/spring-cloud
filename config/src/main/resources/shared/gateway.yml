@@ -1,11 +1,9 @@
+server:
+  port: 4000
+
 ribbon:
   ReadTimeout: 20000
   ConnectTimeout: 20000
-
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://registry:${PORT:8761}/eureka
 
 zuul:
   ignoredServices: '*'
@@ -26,5 +24,3 @@ zuul:
       stripPrefix: false
       sensitiveHeaders:
 
-server:
-  port: 4000

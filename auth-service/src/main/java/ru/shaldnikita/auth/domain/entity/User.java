@@ -5,6 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import java.util.Collection;
 
@@ -12,6 +13,7 @@ import java.util.Collection;
  * @author n.shaldenkov on 18.08.2018
  */
 @Entity
+@Table(name = "users")
 public class User implements UserDetails {
 
     @Id

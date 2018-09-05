@@ -1,10 +1,10 @@
 package ru.shaldnikita.auth.configuration;
 
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -19,20 +19,21 @@ import ru.shaldnikita.auth.service.security.SecurityUserDetailsService;
  */
 @Configuration
 @EnableAuthorizationServer
-@RequiredArgsConstructor
 public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
 
     private TokenStore tokenStore = new InMemoryTokenStore();
+    private final String NOOP_PASSWORD_ENCODE = "{noop}";
 
+    @Autowired
     @Qualifier("authenticationManagerBean")
-    private final AuthenticationManager authenticationManager;
+    private AuthenticationManager authenticationManager;
 
-    private final SecurityUserDetailsService userDetailsService;
-
-    private final PasswordEncoder encoder;
+    @Autowired
+    private SecurityUserDetailsService userDetailsService;
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+
 
         // @formatter:off
         clients.inMemory()
@@ -42,25 +43,24 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
                 .and()
                 .withClient("bookstore")
                 .secret("changeme")
-                .authorizedGrantTypes("client_credentials", "refresh_token")
-                .scopes("server");
+                .scopes("server")
+                .authorizedGrantTypes("client_credentials", "refresh_token");
         // @formatter:on
     }
 
     @Override
-    public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
+    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints
                 .tokenStore(tokenStore)
                 .authenticationManager(authenticationManager)
                 .userDetailsService(userDetailsService);
     }
 
-
     @Override
-    public void configure(AuthorizationServerSecurityConfigurer oauthServer) {
+    public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
         oauthServer
                 .tokenKeyAccess("permitAll()")
                 .checkTokenAccess("isAuthenticated()")
-                .passwordEncoder(encoder);
+                .passwordEncoder(NoOpPasswordEncoder.getInstance());
     }
 }
