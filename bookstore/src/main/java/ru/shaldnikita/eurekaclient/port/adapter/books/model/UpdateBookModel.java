@@ -13,7 +13,6 @@ import java.math.BigDecimal;
  */
 @AllArgsConstructor
 @Data
-@NoArgsConstructor
 public class UpdateBookModel {
 
     @NotNull
