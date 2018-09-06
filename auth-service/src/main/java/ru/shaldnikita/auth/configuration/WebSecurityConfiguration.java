@@ -3,6 +3,7 @@ package ru.shaldnikita.auth.configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,6 +17,7 @@ import ru.shaldnikita.auth.service.security.SecurityUserDetailsService;
  */
 @Configuration
 @EnableResourceServer
+@Order(1)
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -25,9 +27,25 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         // @formatter:off
         http
-                .authorizeRequests().anyRequest().authenticated()
+                .requestMatchers()
+                .antMatchers("/ping")
+                .antMatchers("/login")
+                .antMatchers("/oauth/authorize")
                 .and()
-                .csrf().disable();
+                .authorizeRequests()
+                .antMatchers("/ping").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .csrf()
+                .disable()
+                .formLogin()
+                .permitAll()
+                .and()
+                .rememberMe()
+                .rememberMeParameter("remember")
+                .and()
+                .httpBasic().disable()
+                .logout().permitAll();
         // @formatter:on
     }
 
