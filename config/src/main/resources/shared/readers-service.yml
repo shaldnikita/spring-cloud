@@ -1,0 +1,47 @@
+server:
+  servlet:
+    context-path: /readers
+  port: 6000
+
+---
+spring.profiles: default
+
+security:
+  oauth2:
+    client:
+      clientId: readers-service
+      clientSecret: changeme
+      accessTokenUri: http://localhost:5000/auth/oauth/token
+      grant-type: client_credentials
+      scope: server
+
+spring:
+  data:
+    mongodb:
+      host: localhost
+      username: $(MONGO_USER:user}
+      password: ${MONGO_PASSWORD:changeme}
+      database: library
+      port: 27017
+
+---
+spring.profiles: prod
+
+security:
+  oauth2:
+    client:
+      clientId: readers-service
+      clientSecret: changeme
+      accessTokenUri: http://auth-service:5000/auth/oauth/token
+      grant-type: client_credentials
+      scope: server
+
+spring:
+  data:
+    mongodb:
+      host: readers-mongodb
+      username: $(MONGO_PASSWORD:user}
+      password: ${MONGO_PASSWORD:changeme}
+      database: library
+      port: 27017
+
