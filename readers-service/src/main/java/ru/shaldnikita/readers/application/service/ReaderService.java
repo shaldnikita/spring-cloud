@@ -1,6 +1,7 @@
 package ru.shaldnikita.readers.application.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.shaldnikita.readers.application.client.AuthServiceFeignClient;
@@ -19,12 +20,17 @@ import javax.annotation.Nonnull;
 @RequiredArgsConstructor
 public class ReaderService {
 
+    private final BCryptPasswordEncoder passwordEncoder;
+
     private final ReaderRepository readerRepository;
 
     private final AuthServiceFeignClient authServiceFeignClient;
 
     @Transactional
     public ReaderModel registerNewReader(@Nonnull User user) {
+        String encodedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
+
         Reader reader = new Reader(user.getUsername(), user.getPassword());
 
         this.authServiceFeignClient.createUser(user);
