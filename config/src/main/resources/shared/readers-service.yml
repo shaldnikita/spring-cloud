@@ -1,7 +1,7 @@
 server:
   servlet:
     context-path: /readers
-  port: 6000
+  port: 9000
 
 ---
 spring.profiles: default
@@ -42,8 +42,8 @@ spring:
   data:
     mongodb:
       host: readers-mongodb
-      username: $(MONGO_PASSWORD:user}
-      password: ${MONGO_PASSWORD:changeme}
+      username: $(MONGO_PASSWORD:}
+      password: ${MONGO_PASSWORD:}
       database: Readers
       port: 27017
 

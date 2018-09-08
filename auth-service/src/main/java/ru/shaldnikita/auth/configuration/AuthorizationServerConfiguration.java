@@ -43,7 +43,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
                 .scopes("server")
                 .authorizedGrantTypes("client_credentials", "refresh_token")
                 .and()
-                .withClient("readers")
+                .withClient("readers-service")
                 .secret("changeme")
                 .scopes("server")
                 .authorizedGrantTypes("client_credentials", "refresh_token");

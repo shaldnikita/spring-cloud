@@ -14,6 +14,7 @@ import java.security.Principal;
  * @author n.shaldenkov on 07.09.2018
  */
 @RestController
+@RequestMapping("/")
 @RequiredArgsConstructor
 public class ReadersController {
 
@@ -25,12 +26,12 @@ public class ReadersController {
         return this.readerService.findReaderByLogin(name);
     }
 
-    @RequestMapping(path = "/", method = RequestMethod.POST)
+    @PostMapping("/")
     public ReaderModel createNewAccount(@Valid @RequestBody User user) {
         return readerService.registerNewReader(user);
     }
 
-    @RequestMapping(path = "/current", method = RequestMethod.GET)
+    @GetMapping("/current")
     public ReaderModel getCurrentAccount(Principal principal) {
         return readerService.findReaderByLogin(principal.getName());
     }
