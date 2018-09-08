@@ -19,17 +19,17 @@ import java.time.LocalDate;
 @EqualsAndHashCode(callSuper = true)
 public class Author extends BaseEntity {
 
-    @Nonnull
-    private String name;
-
-    @Nonnull
-    private LocalDate birthdayDate;
-
     @AttributeOverride(name = "id",
             column = @Column(name = "author_id", unique = true, nullable = false))
     @Embedded
     @Nonnull
     private AuthorId authorId;
+
+    @Nonnull
+    private String name;
+
+    @Nonnull
+    private LocalDate birthdayDate;
 
     public Author(@Nonnull String name, @Nonnull LocalDate birthdayDate) {
         this.authorId = new AuthorId();

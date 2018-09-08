@@ -8,7 +8,7 @@ import ru.shaldnikita.readers.domain.User;
 /**
  * @author n.shaldenkov on 07.09.2018
  */
-@FeignClient(name = "auth-service")
+@FeignClient(name = "auth-service", url = "${auth-service.url}")
 public interface AuthServiceFeignClient {
 
     @PostMapping(value = "/auth/users", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)

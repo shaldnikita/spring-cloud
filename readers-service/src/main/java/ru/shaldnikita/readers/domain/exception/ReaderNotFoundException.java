@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  */
 @ResponseStatus(HttpStatus.NOT_FOUND)
 public class ReaderNotFoundException extends IllegalStateException {
+
     public ReaderNotFoundException(String login) {
         super("Reader with login " + login + " not found.");
     }
+
 }

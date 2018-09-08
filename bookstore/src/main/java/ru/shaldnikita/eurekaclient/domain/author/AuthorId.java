@@ -2,6 +2,7 @@ package ru.shaldnikita.eurekaclient.domain.author;
 
 import lombok.Getter;
 
+import javax.annotation.Nonnull;
 import java.util.UUID;
 
 /**
@@ -10,7 +11,8 @@ import java.util.UUID;
 @Getter
 public class AuthorId {
 
-    private String id;
+    @Nonnull
+    private final String id;
 
     public AuthorId(String id) {
         this.id = id;

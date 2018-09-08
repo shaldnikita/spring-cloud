@@ -6,6 +6,8 @@ server:
 ---
 spring.profiles: default
 
+auth-service.url: localhost:5000
+
 security:
   oauth2:
     client:
@@ -18,14 +20,14 @@ security:
 spring:
   data:
     mongodb:
-      host: localhost
-      username: $(MONGO_USER:user}
-      password: ${MONGO_PASSWORD:changeme}
-      database: library
-      port: 27017
+      host: ${MONGO_HOST:localhost}
+      port: ${MONGO_PORT:27017}
+      database: Readers
 
 ---
 spring.profiles: prod
+
+auth-service.url: auth-service
 
 security:
   oauth2:
@@ -42,6 +44,6 @@ spring:
       host: readers-mongodb
       username: $(MONGO_PASSWORD:user}
       password: ${MONGO_PASSWORD:changeme}
-      database: library
+      database: Readers
       port: 27017
 
