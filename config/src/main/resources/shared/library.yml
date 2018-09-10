@@ -1,0 +1,31 @@
+server:
+  servlet:
+    context-path: /library
+  port: ${PORT:9000}
+
+
+---
+spring.profiles: prod
+
+security:
+  oauth2:
+    client:
+      clientId: library
+      clientSecret: changeme
+      accessTokenUri: http://auth-service:5000/auth/oauth/token
+      userAuthorizationUri: http://auth-service:5000/auth/oauth/authorize
+    resource:
+      userInfoUri: http://auth-service:5000/auth/current
+
+---
+spring.profiles: default
+
+security:
+  oauth2:
+    client:
+      clientId: library
+      clientSecret: changeme
+      accessTokenUri: http://localhost:5000/auth/oauth/token
+      userAuthorizationUri: http://localhost:5000/auth/oauth/authorize
+    resource:
+      userInfoUri: http://localhost:5000/auth/current

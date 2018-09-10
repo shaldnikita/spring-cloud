@@ -10,12 +10,13 @@
 
 
     <modules>
-        <module>registry</module>
-        <module>bookstore</module>
-        <module>config</module>
-        <module>auth-service</module>
-        <module>gateway</module>
+        <module>library</module>
         <module>readers-service</module>
+        <module>bookstore</module>
+        <module>auth-service</module>
+        <module>registry</module>
+        <module>gateway</module>
+        <module>config</module>
     </modules>
 
 </project>

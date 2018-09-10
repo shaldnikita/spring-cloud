@@ -29,11 +29,17 @@ after_success:
   - docker tag $BOOKSTORE:$COMMIT $BOOKSTORE:$TAG
   - docker push $BOOKSTORE
 
-# READERS SERVICE
+  # READERS SERVICE
   - export READERS=shaldnikita/homeproject-readers-service
-  - docker build -t READERS:3$COMMIT ./readers-service
+  - docker build -t READERS:$COMMIT ./readers-service
   - docker tag READERS:$COMMIT READERS:$TAG
   - docker push READERS
+
+  # LIBRARY
+  - export LIBRARY=shaldnikita/homeproject-library
+  - docker build -t LIBRARY:$COMMIT ./library
+  - docker tag LIBRARY:$COMMIT LIBRARY:$TAG
+  - docker push LIBRARY
 
   # CONFIG SERVICE
   - export CONFIG=shaldnikita/homeproject-config
