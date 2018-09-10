@@ -1,6 +1,7 @@
 spring:
   application:
     name: library
+
 ---
 spring.profiles: default
 

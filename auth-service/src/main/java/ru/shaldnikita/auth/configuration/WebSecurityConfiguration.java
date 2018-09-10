@@ -28,12 +28,10 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         // @formatter:off
         http
                 .requestMatchers()
-                .antMatchers("/ping")
                 .antMatchers("/login")
                 .antMatchers("/oauth/authorize")
                 .and()
                 .authorizeRequests()
-                .antMatchers("/ping").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .csrf()

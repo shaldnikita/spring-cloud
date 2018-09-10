@@ -1,21 +1,25 @@
-package ru.shaldnikita.bookstore.configuration.security;
+package ru.shaldnikita.library.configuration.security;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 
 /**
- * @author n.shaldenkov on 25.08.2018
+ * @author n.shaldenkov on 07.09.2018
  */
 @Configuration
-@EnableResourceServer
-public class OauthConfiguration extends WebSecurityConfigurerAdapter {
+@Order(1)
+public class ResourceServerConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+        http.antMatcher("/**")
+                .authorizeRequests()
+                .antMatchers("/", "/login**")
+                .permitAll()
                 .anyRequest()
                 .authenticated();
     }
+
 }
