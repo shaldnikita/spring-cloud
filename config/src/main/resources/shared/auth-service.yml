@@ -3,9 +3,6 @@ server:
     context-path: /auth
   port: ${PORT:5000}
 
----
-spring.profiles: default
-
 spring:
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQL9Dialect
@@ -15,6 +12,10 @@ spring:
       ddl-auto: create
       show_sql: true
       use-new-id-generator-mappings: true
+---
+spring.profiles: default
+
+spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/homeproject
     username: ${POSTGRES_USER:user}
@@ -24,10 +25,6 @@ spring:
 spring.profiles: prod
 
 spring:
-  jpa:
-    hibernate:
-      ddl-auto: create
-      use-new-id-generator-mappings: true
   datasource:
     url: jdbc:postgresql://auth-postgresql:5432/homeproject
     username: ${POSTGRES_USER:user}

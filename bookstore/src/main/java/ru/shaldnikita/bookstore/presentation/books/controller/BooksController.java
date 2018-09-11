@@ -18,7 +18,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Optional;
 
-@RestController("/api/books")
+@RestController
+@RequestMapping("/api/books")
 @RequiredArgsConstructor
 public class BooksController {
 

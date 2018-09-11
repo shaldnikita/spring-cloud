@@ -27,5 +27,7 @@ security:
       clientSecret: changeme
       accessTokenUri: http://localhost:5000/auth/oauth/token
       userAuthorizationUri: http://localhost:5000/auth/oauth/authorize
+      grant-type: ui
     resource:
       userInfoUri: http://localhost:5000/auth/current
+

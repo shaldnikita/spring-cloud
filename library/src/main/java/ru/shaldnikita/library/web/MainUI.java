@@ -6,7 +6,7 @@ import com.vaadin.flow.router.Route;
 /**
  * @author Nikita Shaldenkov <nikita.shaldenkov@bostongene.com>
  */
-@Route("")
+@Route("a")
 public class MainUI extends Div {
 
     public MainUI() {

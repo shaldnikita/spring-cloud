@@ -19,7 +19,8 @@ import java.util.Optional;
 /**
  * @author n.shaldenkov on 02.09.2018
  */
-@RestController("/api/authors")
+@RestController
+@RequestMapping("/api/authors")
 @RequiredArgsConstructor
 public class AuthorsController {
 

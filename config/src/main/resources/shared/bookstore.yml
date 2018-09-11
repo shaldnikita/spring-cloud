@@ -5,20 +5,18 @@ server:
 
 spring:
   jpa:
-  database-platform: org.hibernate.dialect.PostgreSQL9Dialect
-  properties:
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    properties.hibernate.temp.use_jdbc_metadata_defaults: false
+    show_sql: true
     hibernate:
-      temp:
-      use_jdbc_metadata_defaults: false
+      ddl-auto: create
+      show_sql: true
+      use-new-id-generator-mappings: true
 
 ---
 spring.profiles: prod
 
 spring:
-  jpa:
-    hibernate:
-      ddl-auto: create
-      use-new-id-generator-mappings: true
   datasource:
     url: jdbc:postgresql://bookstore-postgresql:5432/homeproject
     username: $(POSTGRES_USER:user}
@@ -37,13 +35,9 @@ security:
 spring.profiles: default
 
 spring:
-  jpa:
-    hibernate:
-      ddl-auto: create
-      use-new-id-generator-mappings: true
   datasource:
     url: jdbc:postgresql://localhost:5432/homeproject
-    username: $(POSTGRES_USER:user}
+    username: ${POSTGRES_USER:user}
     password: ${POSTGRES_PASSWORD:changeme}
 
 security:
