@@ -9,14 +9,15 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import ru.shaldnikita.auth.service.security.SecurityUserDetailsService;
 
 /**
  * @author n.shaldenkov on 18.08.2018
  */
 @Configuration
-@EnableResourceServer
 @Order(1)
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
@@ -25,26 +26,20 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        // @formatter:off
-        http
-                .requestMatchers()
-                .antMatchers("/login")
-                .antMatchers("/oauth/authorize")
-                .and()
-                .authorizeRequests()
-                .anyRequest().authenticated()
-                .and()
-                .csrf()
-                .disable()
-                .formLogin()
+        //@formatter:off
+        http.formLogin()
+                .loginPage("/login")
                 .permitAll()
                 .and()
-                .rememberMe()
-                .rememberMeParameter("remember")
+                .authorizeRequests().antMatchers("/resources/**","/login", "/logout","oauth/authorize")
+                .permitAll()
                 .and()
-                .httpBasic().disable()
-                .logout().permitAll();
-        // @formatter:on
+                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
+                .and()
+                .authorizeRequests().anyRequest().authenticated()
+                .and()
+                .csrf().disable();
+        //@formatter:on
     }
 
     @Override
@@ -62,5 +57,15 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Configuration
+    protected static class LoginFormConfiguration implements WebMvcConfigurer {
+
+        @Override
+        public void addViewControllers(ViewControllerRegistry registry) {
+            registry.addViewController("/login").setViewName("login");
+        }
+
     }
 }

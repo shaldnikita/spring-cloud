@@ -22,6 +22,7 @@ public class ResourceServerConfiguration extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .anyRequest()
                 .authenticated();
+
     }
 
 }

@@ -1,7 +1,7 @@
 server:
   servlet:
     context-path: /readers
-  port: 9000
+  port: 8500
 
 ---
 spring.profiles: default
