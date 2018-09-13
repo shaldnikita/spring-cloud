@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -27,18 +28,18 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         //@formatter:off
-        http.formLogin()
-                .loginPage("/login")
-                .permitAll()
-                .and()
-                .authorizeRequests().antMatchers("/resources/**","/login", "/logout","oauth/authorize")
-                .permitAll()
-                .and()
+        http
+                .formLogin().loginPage("/login")
+        .and()
+                .authorizeRequests().antMatchers("/login", "/logout").permitAll()
+        .and()
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
-                .and()
+        .and()
                 .authorizeRequests().anyRequest().authenticated()
-                .and()
-                .csrf().disable();
+        .and()
+                .requestMatchers().antMatchers("/login", "/logout", "/oauth/authorize", "/oauth/confirm_access")
+        .and()
+                .csrf().csrfTokenRepository(new CookieCsrfTokenRepository());
         //@formatter:on
     }
 
@@ -60,7 +61,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Configuration
-    protected static class LoginFormConfiguration implements WebMvcConfigurer {
+    protected static class LoginPageConfiguration implements WebMvcConfigurer {
 
         @Override
         public void addViewControllers(ViewControllerRegistry registry) {
