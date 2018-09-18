@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import ru.shaldnikita.auth.service.security.SecurityUserDetailsService;
@@ -18,6 +19,7 @@ import ru.shaldnikita.auth.service.security.SecurityUserDetailsService;
  */
 @Configuration
 @Order(1)
+@EnableResourceServer
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -29,11 +31,11 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .formLogin().loginPage("/login")
         .and()
-                .authorizeRequests().antMatchers("/login", "/logout", "/users/me").permitAll()
+                .authorizeRequests().antMatchers("/login", "/logout").permitAll()
         .and()
                 .authorizeRequests().anyRequest().authenticated()
         .and()
-                .requestMatchers().antMatchers("/login", "/logout", "/oauth/authorize", "/users/me")
+                .requestMatchers().antMatchers("/login", "/logout", "/oauth/authorize")
         .and()
                 .csrf().disable();
         //@formatter:on

@@ -14,8 +14,6 @@ security:
       clientSecret: changeme
       accessTokenUri: http://auth-service:5000/auth/oauth/token
       userAuthorizationUri: http://auth-service:5000/auth/oauth/authorize
-    resource:
-      userInfoUri: http://auth-service:5000/auth/current
 
 ---
 spring.profiles: default
@@ -23,13 +21,7 @@ spring.profiles: default
 security:
   oauth2:
     client:
-      clientId: 244746426198019
-      clientSecret: ${FACEBOOK_SECRET}
-      accessTokenUri: https://graph.facebook.com/oauth/access_token
-      userAuthorizationUri: https://www.facebook.com/dialog/oauth
-      tokenName: oauth_token
-      authenticationScheme: query
-      clientAuthenticationScheme: form
-    resource:
-      userInfoUri: https://graph.facebook.com/me
-
+      clientId: library
+      clientSecret: changeme
+      accessTokenUri: http://localhost:5000/auth/oauth/token
+      userAuthorizationUri: http://localhost:5000/auth/oauth/authorize

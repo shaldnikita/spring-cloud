@@ -2,7 +2,7 @@ package ru.shaldnikita.bookstore.presentation.books.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +26,7 @@ public class BooksController {
     private final BookService bookService;
 
     @GetMapping
-    public Page<BookModel> getBooks(@PageableDefault PageRequest pageable) {
+    public Page<BookModel> getBooks(@PageableDefault Pageable pageable) {
         return this.bookService.findBooks(pageable);
     }
 

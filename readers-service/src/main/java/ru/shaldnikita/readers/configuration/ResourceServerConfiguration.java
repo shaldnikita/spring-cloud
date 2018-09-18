@@ -2,7 +2,6 @@ package ru.shaldnikita.readers.configuration;
 
 import feign.RequestInterceptor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.security.oauth2.client.feign.OAuth2FeignRequestInterceptor;
 import org.springframework.context.annotation.Bean;
@@ -22,8 +21,6 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 @EnableResourceServer
 @RequiredArgsConstructor
 public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
-
-    private final ResourceServerProperties sso;
 
     @Bean
     @ConfigurationProperties(prefix = "security.oauth2.client")

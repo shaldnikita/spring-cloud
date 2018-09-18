@@ -9,3 +9,9 @@ security:
   oauth2:
     resource:
       user-info-uri: http://auth-service/auth/users/current
+
+auth-service: auth-service/auth
+registry: registry/registry
+gateway: gateway
+library: library/library
+bookstore-service: bookstore/bookstore
