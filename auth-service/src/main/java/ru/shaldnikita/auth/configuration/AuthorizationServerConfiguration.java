@@ -7,6 +7,7 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
@@ -34,19 +35,19 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 
         // @formatter:off
         clients.inMemory()
-                .withClient("library")
-                .authorizedGrantTypes("refresh_token", "authorization_code")
-                .scopes("ui")
+                    .withClient("library")
+                    .scopes("ui")
+                    .authorizedGrantTypes("all")
                 .and()
-                .withClient("bookstore")
-                .secret("changeme")
-                .scopes("server")
-                .authorizedGrantTypes("client_credentials", "refresh_token")
+                    .withClient("bookstore")
+                    .secret("changeme")
+                    .scopes("server")
+                    .authorizedGrantTypes("client_credentials", "refresh_token")
                 .and()
-                .withClient("readers-service")
-                .secret("changeme")
-                .scopes("server")
-                .authorizedGrantTypes("client_credentials", "refresh_token");
+                    .withClient("readers-service")
+                    .secret("changeme")
+                    .scopes("server")
+                    .authorizedGrantTypes("client_credentials", "refresh_token");
         // @formatter:on
     }
 

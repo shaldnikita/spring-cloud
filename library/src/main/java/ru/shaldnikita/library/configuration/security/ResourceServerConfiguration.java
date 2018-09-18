@@ -12,9 +12,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 @EnableOAuth2Sso
 @Order(1)
-public class ResourceServerConfiguration extends WebSecurityConfigurerAdapter {
+public class ResourceServerConfiguration/* extends WebSecurityConfigurerAdapter */{
 
-    @Override
+   /* @Override
     public void configure(HttpSecurity http) throws Exception {
         http.antMatcher("/**")
                 .authorizeRequests()
@@ -23,5 +23,5 @@ public class ResourceServerConfiguration extends WebSecurityConfigurerAdapter {
                 .anyRequest()
                 .authenticated();
 
-    }
+    }*/
 }
