@@ -24,5 +24,4 @@ public class ResourceServerConfiguration extends WebSecurityConfigurerAdapter {
                 .authenticated();
 
     }
-
 }

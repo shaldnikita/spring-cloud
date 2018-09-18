@@ -9,8 +9,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import ru.shaldnikita.auth.service.security.SecurityUserDetailsService;
@@ -31,15 +29,13 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .formLogin().loginPage("/login")
         .and()
-                .authorizeRequests().antMatchers("/login", "/logout").permitAll()
-        .and()
-                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
+                .authorizeRequests().antMatchers("/login", "/logout", "/users/me").permitAll()
         .and()
                 .authorizeRequests().anyRequest().authenticated()
         .and()
-                .requestMatchers().antMatchers("/login", "/logout", "/oauth/authorize", "/oauth/confirm_access")
+                .requestMatchers().antMatchers("/login", "/logout", "/oauth/authorize", "/users/me")
         .and()
-                .csrf().csrfTokenRepository(new CookieCsrfTokenRepository());
+                .csrf().disable();
         //@formatter:on
     }
 

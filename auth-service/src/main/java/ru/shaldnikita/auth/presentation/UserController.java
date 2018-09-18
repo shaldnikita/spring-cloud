@@ -1,7 +1,7 @@
 package ru.shaldnikita.auth.presentation;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.actuate.trace.http.HttpTrace;
+import org.springframework.boot.actuate.trace.http.HttpTrace.Principal;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +23,7 @@ public class UserController {
     private final UserService userService;
 
     @RequestMapping(value = "/current", method = RequestMethod.GET)
-    public HttpTrace.Principal getUser(HttpTrace.Principal principal) {
+    public Principal getUser(Principal principal) {
         return principal;
     }
 
