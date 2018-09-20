@@ -2,8 +2,7 @@ package ru.shaldnikita.bookstore.presentation.books.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.shaldnikita.bookstore.application.book.BookService;
@@ -19,15 +18,15 @@ import java.net.URISyntaxException;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/books")
+@RequestMapping("/books")
 @RequiredArgsConstructor
 public class BooksController {
 
     private final BookService bookService;
 
     @GetMapping
-    public Page<BookModel> getBooks(@PageableDefault Pageable pageable) {
-        return this.bookService.findBooks(pageable);
+    public Page<BookModel> getBooks(/*@PageableDefault Pageable pageable*/) {
+        return this.bookService.findBooks(PageRequest.of(1,2 )/*pageable*/);
     }
 
     @GetMapping("/{bookId}")

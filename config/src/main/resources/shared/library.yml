@@ -14,6 +14,8 @@ security:
       clientSecret: changeme
       accessTokenUri: http://auth-service:5000/auth/oauth/token
       userAuthorizationUri: http://auth-service:5000/auth/oauth/authorize
+      grant-type: password
+      scope: ui
 
 ---
 spring.profiles: default
@@ -25,3 +27,4 @@ security:
       clientSecret: changeme
       accessTokenUri: http://localhost:5000/auth/oauth/token
       userAuthorizationUri: http://localhost:5000/auth/oauth/authorize
+      scope: ui

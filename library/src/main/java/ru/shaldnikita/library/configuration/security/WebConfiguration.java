@@ -12,11 +12,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Order(1)
 public class WebConfiguration extends WebSecurityConfigurerAdapter {
 
+
     @Override
-    public void configure(HttpSecurity http) throws Exception {
+    protected void configure(HttpSecurity http) throws Exception {
+
         http.antMatcher("/**")
                 .authorizeRequests()
-                .antMatchers("/login**")
+                .antMatchers( "/login**")
                 .permitAll()
                 .anyRequest()
                 .authenticated();

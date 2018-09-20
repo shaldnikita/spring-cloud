@@ -18,5 +18,4 @@ public class BookModel {
 
     @Nonnull
     private BigDecimal price;
-
 }
