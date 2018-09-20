@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import ru.shaldnikita.bookstore.application.book.BookService;
 import ru.shaldnikita.bookstore.application.book.model.BookModel;
@@ -27,6 +28,12 @@ public class BooksController {
     @GetMapping
     public Page<BookModel> getBooks(/*@PageableDefault Pageable pageable*/) {
         return this.bookService.findBooks(PageRequest.of(1,2 )/*pageable*/);
+    }
+
+    @GetMapping("/count")
+    @PreAuthorize("#oauth2.hasScope('server')")
+    public Page<BookModel> getBooksProtected() {
+        return this.bookService.findBooks(PageRequest.of(2,3 )/*pageable*/);
     }
 
     @GetMapping("/{bookId}")
