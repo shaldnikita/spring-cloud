@@ -10,8 +10,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import ru.shaldnikita.auth.service.security.SecurityUserDetailsService;
 
 /**
@@ -35,7 +33,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         .and()
                 .authorizeRequests().anyRequest().authenticated()
         .and()
-                .requestMatchers().antMatchers("/login", "/logout", "/oauth/authorize")
+                .requestMatchers().antMatchers("/login", "/logout","/oauth/authorize")
         .and()
                 .csrf().disable();
         //@formatter:on
@@ -58,13 +56,5 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-    @Configuration
-    protected static class LoginPageConfiguration implements WebMvcConfigurer {
 
-        @Override
-        public void addViewControllers(ViewControllerRegistry registry) {
-            registry.addViewController("/login").setViewName("login");
-        }
-
-    }
 }

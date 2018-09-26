@@ -14,7 +14,7 @@ import ru.shaldnikita.library.application.book.BookModel;
 @FeignClient(name = "bookstore", url = "${bookstore-service:}")
 public interface BookstoreServiceClient  {
 
-    @GetMapping("/api/books")
+    @GetMapping("/books")
     Page<BookModel> getBooks(PageRequest pageable);
 
 }

@@ -6,8 +6,6 @@ server:
 ---
 spring.profiles: default
 
-auth-service.url: localhost:5000
-
 security:
   oauth2:
     client:

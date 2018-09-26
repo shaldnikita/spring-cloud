@@ -35,8 +35,10 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         // @formatter:off
         clients.inMemory()
                     .withClient("library")
+                    .secret("changeme")
                     .scopes("ui")
-                    .authorizedGrantTypes("password","refresh_token")
+                    .authorizedGrantTypes("authorization_code","refresh_token")
+                    .autoApprove(true)
                 .and()
                     .withClient("bookstore")
                     .secret("changeme")
