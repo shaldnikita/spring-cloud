@@ -5,12 +5,16 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.shaldnikita.bookstore.application.author.model.AuthorModel;
+import ru.shaldnikita.bookstore.application.author.model.CreateAuthorModel;
+import ru.shaldnikita.bookstore.application.author.model.UpdateAuthorModel;
 import ru.shaldnikita.bookstore.domain.author.Author;
 import ru.shaldnikita.bookstore.domain.author.AuthorId;
 import ru.shaldnikita.bookstore.domain.author.AuthorRepository;
 import ru.shaldnikita.bookstore.domain.author.exceptions.AuthorNotFoundException;
 
 import javax.annotation.Nonnull;
+import javax.validation.Valid;
 import java.util.Optional;
 
 /**
@@ -24,10 +28,12 @@ public class AuthorService {
 
     @Nonnull
     @Transactional
-    public Author createAuthor(AuthorModel authorToBeCreated) {
+    public AuthorModel createAuthor(CreateAuthorModel authorToBeCreated) {
         Author author = new Author(authorToBeCreated.getName(),
                 authorToBeCreated.getBirthdayDate());
-        return this.repository.save(author);
+        Author createdAuthor = this.repository.save(author);
+        return new AuthorModel(createdAuthor.getAuthorId().getId(),
+                createdAuthor.getName(), createdAuthor.getBirthdayDate());
     }
 
     @Transactional
@@ -55,14 +61,16 @@ public class AuthorService {
 
     @Nonnull
     @Transactional
-    public Author updateAuthor(AuthorModel authorToBeUpdated) {
-        AuthorId authorId = new AuthorId(authorToBeUpdated.getId());
+    public AuthorModel updateAuthor(@Valid UpdateAuthorModel authorToBeUpdated) {
+        AuthorId authorId = new AuthorId(authorToBeUpdated.getAuthorId());
         return this.repository.findByAuthorId(authorId)
                 .map(author -> {
                     author.setBirthdayDate(authorToBeUpdated.getBirthdayDate());
                     author.setName(authorToBeUpdated.getName());
                     return this.repository.save(author);
                 })
+                .map(updatedAuthor -> new AuthorModel(updatedAuthor.getAuthorId().getId(),
+                        updatedAuthor.getName(), updatedAuthor.getBirthdayDate()))
                 .orElseThrow(() -> new AuthorNotFoundException(authorId));
     }
 }

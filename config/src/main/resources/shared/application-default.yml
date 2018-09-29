@@ -1,7 +1,5 @@
 eureka.client.enabled: false
 
-logging.level.org.springframework.*: DEBUG
-
 security:
   oauth2:
     resource:

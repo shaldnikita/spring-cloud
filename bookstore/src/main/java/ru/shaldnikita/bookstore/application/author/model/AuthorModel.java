@@ -1,10 +1,9 @@
-package ru.shaldnikita.bookstore.application.author;
+package ru.shaldnikita.bookstore.application.author.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.time.LocalDate;
 
 /**
@@ -14,8 +13,8 @@ import java.time.LocalDate;
 @Data
 public class AuthorModel {
 
-    @Nullable
-    private String id;
+    @Nonnull
+    private String authorId;
 
     @Nonnull
     private String name;
