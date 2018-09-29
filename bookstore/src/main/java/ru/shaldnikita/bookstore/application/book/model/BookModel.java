@@ -14,6 +14,9 @@ import java.math.BigDecimal;
 public class BookModel {
 
     @Nonnull
+    private String bookId;
+
+    @Nonnull
     private String name;
 
     @Nonnull

@@ -18,7 +18,10 @@ import ru.shaldnikita.bookstore.domain.book.BookRepository;
 import ru.shaldnikita.bookstore.domain.book.exceptions.BookNotFoundException;
 
 import javax.annotation.Nonnull;
+import java.util.List;
 import java.util.Optional;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * @author n.shaldenkov on 02.09.2018
@@ -56,23 +59,37 @@ public class BookService {
     public Page<BookModel> findBooks(Pageable pageable) {
         return this.bookRepository.findAll(pageable)
                 .map(book -> new BookModel(
+                        book.getBookId().getId(),
                         book.getName(),
                         book.getPrice(),
                         book.getAuthor().getAuthorId().getId()
                 ));
     }
 
+    @Transactional(readOnly = true)
+    @Nonnull
+    public List<BookModel> findAllBooks() {
+        return this.bookRepository.findAll().stream()
+                .map(book -> new BookModel(
+                        book.getBookId().getId(),
+                        book.getName(),
+                        book.getPrice(),
+                        book.getAuthor().getAuthorId().getId()
+                ))
+                .collect(toList());
+    }
+
     @Transactional
     @Nonnull
-    public Book updateBook(UpdateBookModel updateBook){
+    public Book updateBook(UpdateBookModel updateBook) {
         return this.bookRepository.findByBookId(new BookId(updateBook.getBookId()))
-                .map(book -> updateBook(updateBook,book))
+                .map(book -> updateBook(updateBook, book))
                 .map(this.bookRepository::save)
                 .orElseThrow(() -> new BookNotFoundException(new BookId(updateBook.getBookId())));
     }
 
     @Nonnull
-    private Book updateBook(UpdateBookModel updateBook, Book book){
+    private Book updateBook(UpdateBookModel updateBook, Book book) {
         AuthorId authorId = new AuthorId(updateBook.getAuthorId());
         Optional<Author> author = this.authorService.findAuthorByAuthorId(authorId);
         if (!author.isPresent())

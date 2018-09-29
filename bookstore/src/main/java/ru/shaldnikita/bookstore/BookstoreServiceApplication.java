@@ -34,7 +34,7 @@ public class BookstoreServiceApplication {
 
     @Bean
     public ApplicationRunner applicationRunner() {
-        return (args) -> IntStream.of(10)
+        return args -> IntStream.range(1, 12)
                 .boxed()
                 .map(i -> new CreateAuthorModel("Author" + i, LocalDate.of(1990 + i, i, i)))
                 .map(this.authorService::createAuthor)

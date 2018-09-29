@@ -1,10 +1,11 @@
 package ru.shaldnikita.library.presentation.books.client;
 
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import ru.shaldnikita.library.application.book.BookModel;
+
+import java.util.List;
 
 
 /**
@@ -12,9 +13,10 @@ import ru.shaldnikita.library.application.book.BookModel;
  */
 
 @FeignClient(name = "bookstore", url = "${bookstore-service:}")
-public interface BookstoreServiceClient  {
+public interface BookstoreServiceClient {
 
-    @GetMapping("/books")
-    Page<BookModel> getBooks(PageRequest pageable);
+    @RequestMapping(value = "/books", method = RequestMethod.GET)
+        //todo replace with page
+    List<BookModel> getBooks();
 
 }

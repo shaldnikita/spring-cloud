@@ -26,14 +26,15 @@ public class BooksController {
     private final BookService bookService;
 
     @GetMapping
-    public Page<BookModel> getBooks(/*@PageableDefault Pageable pageable*/) {
-        return this.bookService.findBooks(PageRequest.of(1,2 )/*pageable*/);
+    //todo replace with page
+    public ResponseEntity<?> getBooks() {
+        return ResponseEntity.ok(this.bookService.findAllBooks());
     }
 
     @GetMapping("/count")
     @PreAuthorize("#oauth2.hasScope('server')")
     public Page<BookModel> getBooksProtected() {
-        return this.bookService.findBooks(PageRequest.of(2,3 )/*pageable*/);
+        return this.bookService.findBooks(PageRequest.of(2, 3)/*pageable*/);
     }
 
     @GetMapping("/{bookId}")
@@ -45,7 +46,7 @@ public class BooksController {
     @DeleteMapping("/{bookId}")
     public ResponseEntity deleteBook(@PathVariable String bookId) {
         boolean deleted = this.bookService.deleteBook(new BookId(bookId));
-        if(deleted)
+        if (deleted)
             return ResponseEntity.ok().build();
         else
             return ResponseEntity.badRequest().build();
@@ -53,6 +54,7 @@ public class BooksController {
 
     @PostMapping
     public ResponseEntity createBook(@Valid @RequestBody CreateBookModel book) throws URISyntaxException {
+        System.out.println(123);
         Book createdBook = this.bookService.createBook(book);
         URI createdBookUri = new URI("api/books/" + createdBook.getBookId().getId());
         return ResponseEntity.created(createdBookUri).build();

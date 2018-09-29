@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 @Data
 public class CreateBookModel {
 
-    @NotNull
+    @NotBlank
     private String name;
 
     @NotNull
@@ -22,5 +22,4 @@ public class CreateBookModel {
 
     @NotBlank
     private String authorId;
-
 }

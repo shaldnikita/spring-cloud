@@ -14,10 +14,10 @@ import java.math.BigDecimal;
 @Data
 public class UpdateBookModel {
 
-    @NotNull
+    @NotBlank
     private String bookId;
 
-    @NotNull
+    @NotBlank
     private String name;
 
     @NotNull

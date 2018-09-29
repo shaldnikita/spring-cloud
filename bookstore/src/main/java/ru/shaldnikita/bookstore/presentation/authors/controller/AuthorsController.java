@@ -22,7 +22,7 @@ import java.util.Optional;
  * @author n.shaldenkov on 02.09.2018
  */
 @RestController
-@RequestMapping("/api/authors")
+@RequestMapping("/authors")
 @RequiredArgsConstructor
 public class AuthorsController {
 
