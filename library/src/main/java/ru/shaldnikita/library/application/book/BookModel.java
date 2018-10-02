@@ -2,6 +2,7 @@ package ru.shaldnikita.library.application.book;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.ToString;
 
 import javax.annotation.Nonnull;
 import java.math.BigDecimal;
@@ -11,6 +12,7 @@ import java.math.BigDecimal;
  */
 @AllArgsConstructor
 @Data
+@ToString(includeFieldNames = false)
 public class BookModel {
 
     @Nonnull

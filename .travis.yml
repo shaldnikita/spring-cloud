@@ -4,7 +4,7 @@ services:
   - docker
 
 language: java
-jdk: oraclejdk8
+jdk: openjdk10
 
 env:
   global:
@@ -18,43 +18,31 @@ after_success:
   - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
 
   # AUTH SERVICE
-  - export AUTH=shaldnikita/homeproject-auth-service
+  - export AUTH=shaldnikita/moneycontrol-auth-service
   - docker build -t $AUTH:$COMMIT ./auth-service
   - docker tag $AUTH:$COMMIT $AUTH:$TAG
   - docker push $AUTH
 
-  # BOOKSTORE SERVICE
-  - export BOOKSTORE=shaldnikita/homeproject-bookstore
-  - docker build -t $BOOKSTORE:3$COMMIT ./bookstore
-  - docker tag $BOOKSTORE:$COMMIT $BOOKSTORE:$TAG
-  - docker push $BOOKSTORE
-
-  # READERS SERVICE
-  - export READERS=shaldnikita/homeproject-readers-service
-  - docker build -t READERS:$COMMIT ./readers-service
-  - docker tag READERS:$COMMIT READERS:$TAG
-  - docker push READERS
-
-  # LIBRARY
-  - export LIBRARY=shaldnikita/homeproject-library
-  - docker build -t LIBRARY:$COMMIT ./library
-  - docker tag LIBRARY:$COMMIT LIBRARY:$TAG
-  - docker push LIBRARY
-
   # CONFIG SERVICE
-  - export CONFIG=shaldnikita/homeproject-config
+  - export CONFIG=shaldnikita/moneycontrol-config
   - docker build -t $CONFIG:$COMMIT ./config
   - docker tag $CONFIG:$COMMIT $CONFIG:$TAG
   - docker push $CONFIG
 
   # REGISTRY
-  - export REGISTRY=shaldnikita/homeproject-registry
+  - export REGISTRY=shaldnikita/moneycontrol-registry
   - docker build -t $REGISTRY:$COMMIT ./registry
   - docker tag $REGISTRY:$COMMIT $REGISTRY:$TAG
   - docker push $REGISTRY
 
   # GATEWAY
-  - export GATEWAY=shaldnikita/homeproject-gateway
+  - export GATEWAY=shaldnikita/moneycontrol-gateway
   - docker build -t $GATEWAY:$COMMIT ./gateway
   - docker tag $GATEWAY:$COMMIT $GATEWAY:$TAG
   - docker push $GATEWAY
+
+  # COSTS SERVICE
+  - export COSTS=shaldnikita/moneycontrol-costs-service
+  - docker build -t COSTS:$COMMIT ./costs-service
+  - docker tag COSTS:$COMMIT COSTS:$TAG
+  - docker push COSTS

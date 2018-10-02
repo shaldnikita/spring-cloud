@@ -21,13 +21,14 @@ public class Oauth2Configuration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
         http.antMatcher("/**")
                 .authorizeRequests()
-                .antMatchers("/login**", "VAADIN/**")
+                .antMatchers("/login**")
                 .permitAll()
                 .anyRequest()
-                .authenticated();
+                .authenticated()
+                .and()
+                .csrf().disable();
     }
 
     @Bean

@@ -11,8 +11,8 @@
 
     <modules>
         <module>library</module>
-        <module>readers-service</module>
-        <module>bookstore</module>
+        <module>users-service</module>
+        <module>costs-service</module>
         <module>auth-service</module>
         <module>registry</module>
         <module>gateway</module>

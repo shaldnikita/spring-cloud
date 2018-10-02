@@ -1,4 +1,4 @@
-FROM java:8-jre
+FROM openjdk:10
 MAINTAINER Nikita Shaldenkov <shaldnikita2@yandex.ru>
 
 ADD ./target/gateway.jar /app/
