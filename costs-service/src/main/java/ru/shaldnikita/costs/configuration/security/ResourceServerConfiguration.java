@@ -1,4 +1,4 @@
-package ru.shaldnikita.bookstore.configuration.security;
+package ru.shaldnikita.costs.configuration.security;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -25,7 +25,6 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
     public OAuth2RestTemplate clientCredentialsRestTemplate() {
         return new OAuth2RestTemplate(clientCredentialsResourceDetails());
     }
-
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().anyRequest().authenticated();

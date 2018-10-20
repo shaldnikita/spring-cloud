@@ -1,4 +1,4 @@
-package ru.shaldnikita.bookstore.domain;
+package ru.shaldnikita.costs.domain;
 
 import javax.annotation.Nonnull;
 import javax.annotation.PreDestroy;

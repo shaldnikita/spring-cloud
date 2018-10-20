@@ -1,11 +1,11 @@
-package ru.shaldnikita.bookstore.domain.costs;
+package ru.shaldnikita.costs.domain.costs;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
-import ru.shaldnikita.bookstore.domain.BaseEntity;
+import ru.shaldnikita.costs.domain.BaseEntity;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
