@@ -8,7 +8,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>library</name>
+    <name>cashspender</name>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -112,7 +112,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <finalName>library</finalName>
+                    <finalName>cashspender</finalName>
                 </configuration>
             </plugin>
         </plugins>

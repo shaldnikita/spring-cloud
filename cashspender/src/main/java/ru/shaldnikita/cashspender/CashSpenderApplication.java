@@ -1,4 +1,4 @@
-package ru.shaldnikita.library;
+package ru.shaldnikita.cashspender;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,9 +9,9 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableEurekaClient
 @EnableFeignClients
 @SpringBootApplication
-public class LibraryApplication {
+public class CashSpenderApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(LibraryApplication.class, args);
+        SpringApplication.run(CashSpenderApplication.class, args);
     }
 }

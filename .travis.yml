@@ -46,3 +46,9 @@ after_success:
   - docker build -t COSTS:$COMMIT ./costs-service
   - docker tag COSTS:$COMMIT COSTS:$TAG
   - docker push COSTS
+
+# CASHSPENDER SERVICE
+  - export CASHSPENDER=shaldnikita/moneycontrol-cashspender
+  - docker build -t CASHSPENDER:$COMMIT ./cashspender
+  - docker tag CASHSPENDER:$COMMIT CASHSPENDER:$TAG
+  - docker push CASHSPENDER

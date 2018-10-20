@@ -10,7 +10,7 @@
 
 
     <modules>
-        <module>library</module>
+        <module>cashspender</module>
         <module>users-service</module>
         <module>costs-service</module>
         <module>auth-service</module>

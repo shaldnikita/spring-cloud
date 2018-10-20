@@ -1,4 +1,4 @@
-package ru.shaldnikita.library.configuration.security;
+package ru.shaldnikita.cashspender.configuration.security;
 
 import feign.RequestInterceptor;
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
