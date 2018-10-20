@@ -7,6 +7,7 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 import ru.shaldnikita.costs.domain.BaseEntity;
 
+import javax.annotation.Nonnull;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
@@ -24,4 +25,9 @@ public class CostType extends BaseEntity {
 
     @NotBlank
     private String name;
+
+    @Nonnull
+    public String name() {
+        return name;
+    }
 }
