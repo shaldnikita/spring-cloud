@@ -13,6 +13,7 @@ import ru.shaldnikita.costs.domain.exceptions.CostNotFoundException;
 import ru.shaldnikita.costs.domain.repository.CostRepository;
 
 import javax.annotation.Nonnull;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -52,6 +53,13 @@ public class CostsService {
     }
 
     @Nonnull
+    public List<CostModel> getCosts() {
+        return this.costRepository.findAll().stream()
+                .map(CostsService::mapToModel)
+                .collect(toList());
+    }
+
+    @Nonnull
     public CostModel createCost(@Nonnull CreateCostModel costToBeCreated) {
         Optional<Cost> cost = this.costRepository.findByName(costToBeCreated.getName());
         if (cost.isPresent()) {
@@ -86,4 +94,10 @@ public class CostsService {
             return mapToModel(cost.get());
     }
 
+    @Nonnull
+    public CostModel findById(String costId) {
+        return this.costRepository.findByCostId(UUID.fromString(costId))
+                .map(CostsService::mapToModel)
+                .orElseThrow(() -> new CostNotFoundException(costId));
+    }
 }

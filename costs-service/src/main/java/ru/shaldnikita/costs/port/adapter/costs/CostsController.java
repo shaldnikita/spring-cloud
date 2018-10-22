@@ -1,4 +1,4 @@
-package ru.shaldnikita.costs.presentation.cost;
+package ru.shaldnikita.costs.port.adapter.costs;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +11,7 @@ import ru.shaldnikita.costs.application.service.CostsService;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -22,6 +23,16 @@ import java.util.UUID;
 public class CostsController {
 
     private final CostsService costsService;
+
+    @GetMapping
+    public List<CostModel> getCosts() {
+        return this.costsService.getCosts();
+    }
+
+    @GetMapping("/{costId}")
+    public CostModel findById(@PathVariable String costId) {
+        return this.costsService.findById(costId);
+    }
 
     @PostMapping
     public ResponseEntity<CostModel> createCost(@Valid CreateCostModel cost) throws URISyntaxException {

@@ -19,6 +19,9 @@ public interface CostRepository extends JpaRepository<Cost, Long> {
     Optional<Cost> findByCostIdName(@Nonnull UUID costId, @Nonnull String name);
 
     @Nonnull
+    Optional<Cost> findByCostId(@Nonnull UUID costId);
+
+    @Nonnull
     Optional<Cost> deleteByCostId(@Nonnull UUID costId);
 
 }
