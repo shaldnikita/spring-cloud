@@ -12,6 +12,7 @@
         <groupId>ru.shaldnikita</groupId>
         <artifactId>spring-cloud</artifactId>
         <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <properties>
@@ -125,6 +126,5 @@
             </plugin>
         </plugins>
     </build>
-
 
 </project>
