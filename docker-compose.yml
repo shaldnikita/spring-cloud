@@ -6,7 +6,7 @@ services:
   config:
     environment:
       CONFIG_SERVICE_PASSWORD: changeme
-    image: shaldnikita/homeproject-config
+    image: shaldnikita/moneycontrol-config
     restart: always
     logging:
       options:
@@ -17,7 +17,7 @@ services:
   registry:
     environment:
       CONFIG_SERVICE_PASSWORD: changeme
-    image: shaldnikita/homeproject-registry
+    image: shaldnikita/moneycontrol-registry
     restart: always
     depends_on:
           config:
@@ -29,12 +29,12 @@ services:
         max-size: "10m"
         max-file: "10"
 
-## auth-service + mysql
+## auth-service + postgres
   auth-service:
     environment:
       BOOKSTORE_SERVICE_PASSWORD: changeme
       CONFIG_SERVICE_PASSWORD: changeme
-    image: shaldnikita/homeproject-auth-service
+    image: shaldnikita/moneycontrol-auth-service
     restart: always
     depends_on:
       config:
@@ -45,11 +45,10 @@ services:
         max-file: "10"
 
   auth-mysql:
-    image: mysql
+    image: postgresql:9.6
     restart: always
-    command: --default-authentication-plugin=mysql_native_password
     environment:
-      POSTGRES_DATABASE: homeproject
+      POSTGRES_DATABASE: moneycontrol
       POSTGRES_ROOT_PASSWORD: changeme
       POSTGRES_PASSWORD: changeme
       POSTGRES_USER: user
