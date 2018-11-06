@@ -12,9 +12,9 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 @EnableOAuth2Client
 @EnableFeignClients
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class ReadersServiceApplication {
+public class UsersServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ReadersServiceApplication.class, args);
+        SpringApplication.run(UsersServiceApplication.class, args);
     }
 }

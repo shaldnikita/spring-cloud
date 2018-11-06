@@ -1,8 +1,10 @@
 package ru.shaldnikita.costs.port.adapter.costs;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 import ru.shaldnikita.costs.application.model.CostModel;
 import ru.shaldnikita.costs.application.model.CreateCostModel;
 import ru.shaldnikita.costs.application.model.UpdateCostModel;
@@ -12,7 +14,6 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * @author Nikita Shaldenkov <nikita.shaldenkov@bostongene.com>
@@ -23,6 +24,9 @@ import java.util.UUID;
 public class CostsController {
 
     private final CostsService costsService;
+
+    @Autowired
+    private RestTemplate restTemplate;
 
     @GetMapping
     public List<CostModel> getCosts() {
@@ -48,7 +52,7 @@ public class CostsController {
 
     @DeleteMapping(value = "/{costId}")
     public ResponseEntity<CostModel> deleteCost(@PathVariable String costId) {
-        CostModel deletedCost = this.costsService.deleteCost(UUID.fromString(costId));
+        CostModel deletedCost = this.costsService.deleteCost(costId);
         return ResponseEntity.ok(deletedCost);
     }
 }

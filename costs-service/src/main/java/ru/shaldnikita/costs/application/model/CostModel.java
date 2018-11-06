@@ -1,22 +1,22 @@
 package ru.shaldnikita.costs.application.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.*;
 
 import javax.annotation.Nonnull;
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * @author Nikita Shaldenkov <nikita.shaldenkov@bostongene.com>
  */
 @AllArgsConstructor
 @Getter
+@NoArgsConstructor
+@Setter
 public class CostModel {
 
     @Nonnull
-    private UUID costId;
+    private String costId;
 
     @Nonnull
     private String name;

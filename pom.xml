@@ -18,8 +18,9 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring-cloud.version>Finchley.RELEASE</spring-cloud.version>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>10</java.version>
+        <spring-cloud.version>Finchley.SR1</spring-cloud.version>
     </properties>
 
     <dependencyManagement>

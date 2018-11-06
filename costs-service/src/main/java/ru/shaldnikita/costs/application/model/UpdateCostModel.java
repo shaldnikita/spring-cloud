@@ -7,7 +7,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * @author Nikita Shaldenkov <nikita.shaldenkov@bostongene.com>
@@ -17,7 +16,7 @@ import java.util.UUID;
 public class UpdateCostModel {
 
     @NotNull
-    private UUID costId;
+    private String costId;
 
     @NotBlank
     private String name;

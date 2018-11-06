@@ -12,7 +12,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * @author Nikita Shaldenkov <nikita.shaldenkov@bostongene.com>
@@ -27,7 +26,7 @@ public class Cost extends BaseEntity {
 
     @NotNull
     @Column(unique = true, updatable = false, nullable = false)
-    private UUID costId;
+    private String costId;
 
     @NotBlank
     @Column(unique = true, nullable = false)
@@ -43,8 +42,7 @@ public class Cost extends BaseEntity {
     )
     private List<CostType> types;
 
-
-    public UUID costId() {
+    public String costId() {
         return costId;
     }
 

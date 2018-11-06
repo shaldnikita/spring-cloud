@@ -31,7 +31,7 @@ public class CostsService {
     @Nonnull
     private static Cost mapToDomainObject(@Nonnull CreateCostModel costToBeCreated) {
         return new Cost(
-                UUID.randomUUID(),
+                UUID.randomUUID().toString(),
                 costToBeCreated.getName(),
                 costToBeCreated.getValue(),
                 costToBeCreated.getTypes().stream()
@@ -71,7 +71,7 @@ public class CostsService {
 
     @Nonnull
     public CostModel updateCost(@Nonnull UpdateCostModel costToBeUpdated) {
-        Cost cost = this.costRepository.findByCostIdName(costToBeUpdated.getCostId(), costToBeUpdated.getName())
+        Cost cost = this.costRepository.findByCostIdAndName(costToBeUpdated.getCostId(), costToBeUpdated.getName())
                 .map(foundCost -> {
                     foundCost.setName(costToBeUpdated.getName());
                     foundCost.setValue(costToBeUpdated.getValue());
@@ -86,17 +86,17 @@ public class CostsService {
     }
 
     @Nonnull
-    public CostModel deleteCost(@Nonnull UUID costId) {
+    public CostModel deleteCost(@Nonnull String costId) {
         Optional<Cost> cost = this.costRepository.deleteByCostId(costId);
         if (!cost.isPresent())
-            throw new CostNotFoundException(costId.toString());
+            throw new CostNotFoundException(costId);
         else
             return mapToModel(cost.get());
     }
 
     @Nonnull
     public CostModel findById(String costId) {
-        return this.costRepository.findByCostId(UUID.fromString(costId))
+        return this.costRepository.findByCostId(costId)
                 .map(CostsService::mapToModel)
                 .orElseThrow(() -> new CostNotFoundException(costId));
     }
